@@ -14,8 +14,8 @@ function Login() {
     axios
       .post("http://localhost:3000/login", value)
       .then((res) => {
-        if (res.data.Message === "All field are mandetory") {
-          alert(res.data.Message);
+        if (res.data.message === "Email and password are required") {
+          alert(res.data.message);
         }
       })
       .then((err) => {
@@ -48,7 +48,7 @@ function Login() {
                 <strong>Password</strong>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="Enter Your Password"
                 onChange={(e) => {
                   setValue({ ...value, password: e.target.value });
