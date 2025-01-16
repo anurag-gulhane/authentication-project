@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
@@ -8,13 +8,19 @@ function Register() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:3000/register", values)
-      .then((res) => console.log(res))
-      .then((err) => console.log(err));
+
+    axios.post("http://localhost:3000/register", values).then((res) => {
+      // console.log(res.data.message);
+      if (res.data.message === "User registered successfully!") {
+        navigate("/login");
+      } else {
+        alert("ERROR WHILE REGISTERING THE USER");
+      }
+    });
   };
 
   return (
